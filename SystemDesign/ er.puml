@@ -1,0 +1,155 @@
+@startuml
+title
+社員のライフサイクルを扱うアプリのERD
+end title
+left to right direction
+
+namespace ActiveRecord {
+  namespace 凡例 {
+    class カラムの説明 {
+      + 追加するフィールド
+      - 変わらないフィールド
+      + `not null` のフィールド*
+      + hoge 
+      ~ 未実装のカラム
+      --
+      備考
+    }
+
+    class 主要なテーブル #LightSkyBlue {
+    }
+
+    class 未実装のテーブル #Grey {
+    }
+  }
+
+  class Employee #LightSalmon {
+    + id*
+    + identifier*
+    + classification <full_time|contract|temporary|part_time>*
+  }
+
+  class ActiveEmployee #LightSalmon {
+    + last_name*
+    + first_name*
+    + middle_name
+    + birthday*
+    + email*
+    + phone_number*
+    + address*
+    + employee_id*
+  }
+
+  class RetirementEmployee #LightSalmon {
+    + last_name*
+    + first_name*
+    + middle_name
+    + birthday*
+    + retirement_date*
+    + employee_id*
+  }
+
+  class Company {
+    + id*
+    + name*
+  }
+
+  class CompanyEnter {
+    # 復職する可能性があるため、Employeeとは1対多の関係になる
+    + id*
+    + entered_at*
+    + employee_id*
+    + company_id*
+  }
+
+  class CompanyRetire #LightBlue{
+    # TODO: 本人からではなくofferのパターンをアプリケーションがある程度完成したら実装する。変更容易性を検証するため
+    + id*
+    + status* <apply|disapproved|approved|retire>
+    + employee_id*
+    + company_id*
+  }
+
+  class CompanyRetirementActivity #LightBlue{
+    # 退職に関わるイベントを管理するスーパークラス
+    + id*
+    + status* <apply|disapproved|approved|retire>
+    + employee_id*
+    + department_id*
+  }
+
+  class CompanyRetirementApply #LightBlue{
+    + id*
+    + reason* 
+  }
+
+  class CompanyRetirementJudge #LightBlue {
+    + id*
+    + result* <approved|disapproved>
+    + reason* 
+  }
+
+  class Department {
+    + id*
+    + name*
+  }
+
+  class DepartmentAssign  #LightGoldenRodYellow{
+    # TODO: 本人からではなくofferされるパターンと配属命令パターンの2種をアプリケーションがある程度完成したら実装する。変更容易性を検証するため
+    + id*
+    + status* <apply|disapproved|approved|assign>
+    + employee_id*
+    + department_id*
+  }
+
+  class DepartmentAssignmentActivity #LightGoldenRodYellow{
+    # 配属に関わるイベントを管理するスーパークラス
+    + id*
+    + status* <apply|disapproved|approved|assign>
+    + employee_id*
+    + department_id*
+  }
+
+  class DepartmentAssignmentApply #LightGoldenRodYellow{
+    + id*
+  }
+
+  class DepartmentAssignmentJudge #LightGoldenRodYellow{
+    + id*
+    + result* <approved|disapproved>
+    + reason* 
+  }
+
+  class DepartmentLeave {
+    # 復職し再度退職する可能性があるため、Employeeとは1対多の関係になる
+    + id*
+    + employee_id*
+    + department_id*
+  }
+
+  class DepartmentBelong {
+    # 現在所属している部署を管理
+    + id*
+    + employee_id*
+    + department_id*
+    + status* <assign|leave>
+  }
+
+
+  Company ||-l-o{ Employee
+  Employee ||-l-|{ CompanyEnter
+  Employee ||-l-|| ActiveEmployee
+  Employee ||-l-o| RetirementEmployee
+  Employee ||-l-o{ CompanyRetire
+  CompanyRetire ||-u-|{ CompanyRetirementActivity
+  CompanyRetirementActivity ||-u-o| CompanyRetirementApply
+  CompanyRetirementActivity ||-u-o| CompanyRetirementJudge
+  Employee ||-r-o{ DepartmentAssign
+  DepartmentAssign ||-r-|{ DepartmentAssignmentActivity
+  DepartmentAssignmentActivity ||-r-o| DepartmentAssignmentApply
+  DepartmentAssignmentActivity ||-r-o| DepartmentAssignmentJudge
+  Employee ||-l-o{ DepartmentLeave
+  Department ||-l-o{ DepartmentBelong
+  DepartmentBelong }o-l-|| Employee
+}
+@enduml
