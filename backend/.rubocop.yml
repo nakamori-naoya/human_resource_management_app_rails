@@ -1,0 +1,69 @@
+inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    # You could specify set of files or dirs while you want to be ignored by rubocop
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'Rakefile'
+    - 'lib/gems/**/*'
+    - 'lib/utils/formatted_logger.rb'
+    - 'config/**/*'
+    # gem annotate コマンドの自動生成ファイルなので外す
+    - 'lib/tasks/auto_annotate_models.rake'
+
+Style/Documentation: # Disabling documentation cop
+  Enabled: false
+
+# 日本語でのコメントを許可
+Style/AsciiComments:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 220
+
+# {...} での複数行のブロックを許す
+Style/BlockDelimiters:
+  Enabled: false
+
+# 一行のメソッド定義をSpecでは許す（記述をよりシンプルにするためにあえて利用したい場合）
+Style/SingleLineMethods:
+  Exclude:
+    - 'spec/**/*'
+
+# HTTPメソッドで params などの指定を必須でなくする
+Rails/HttpPositionalArguments:
+  Enabled: false
+
+# Specファイルでは見やすさの都合上マルチブロックを許す場合がある(letなどで冗長に見えないようにしたいとき)
+Layout/MultilineBlockLayout:
+  Exclude:
+    - 'spec/**/*'
+
+# Blockの最大長。 Specでは長くても許す
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/tasks/**/*'
+    - 'lib/**/spec/*'
+    - 'spec/**/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+
+# specで以下のコードを許可する
+# it { subject; expect(a).to eq(b) }
+Style/Semicolon:
+  Exclude:
+    - 'spec/**/*'
+
+# ) } ← こういう表現で終わる形を Spec では使いたい
+Layout/BlockEndNewline:
+  Exclude:
+    - 'spec/**/*'
