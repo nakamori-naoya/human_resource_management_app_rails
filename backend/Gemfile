@@ -39,6 +39,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
+
+
+  gem 'rack-mini-profiler' # 画面が表示されるまでに実行されたメソッドとその処理時間を計測
+  gem 'stackprof'  #計測結果をグラフ表示
+  gem 'flamegraph' #計測結果をグラフ表示
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
