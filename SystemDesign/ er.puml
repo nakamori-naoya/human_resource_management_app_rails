@@ -77,8 +77,6 @@ namespace ActiveRecord {
     # イベントの子クラステーブルの結果を保存。
     + id*
     + status* <apply|disapproved|approved|retire>
-    + employee_id*
-    + department_id*
   }
 
   class CompanyRetirementApply #LightBlue{
@@ -111,8 +109,6 @@ namespace ActiveRecord {
     # イベントの子クラステーブルの結果を保存。
     + id*
     + status* <apply|disapproved|approved|assign>
-    + employee_id*
-    + department_id*
   }
 
   class DepartmentAssignmentApply #LightGoldenRodYellow{
