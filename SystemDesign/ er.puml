@@ -51,6 +51,7 @@ namespace ActiveRecord {
 
   class Company {
     + id*
+    + identifier*
     + name*
   }
 
@@ -63,6 +64,7 @@ namespace ActiveRecord {
   }
 
   class CompanyRetire #LightBlue{
+    # イベント系のテーブルに見えるが、ロングタームイベントパターンなので、リソース系エンティティとなっている？updateを許す
     # TODO: 本人からではなくofferのパターンをアプリケーションがある程度完成したら実装する。変更容易性を検証するため
     + id*
     + status* <apply|disapproved|approved|retire>
@@ -72,6 +74,7 @@ namespace ActiveRecord {
 
   class CompanyRetirementActivity #LightBlue{
     # 退職に関わるイベントを管理するスーパークラス
+    # イベントの子クラステーブルの結果を保存。
     + id*
     + status* <apply|disapproved|approved|retire>
     + employee_id*
@@ -95,6 +98,7 @@ namespace ActiveRecord {
   }
 
   class DepartmentAssign  #LightGoldenRodYellow{
+    # イベント系のテーブルに見えるが、ロングタームイベントパターンなので、リソース系エンティティとなっている？updateを許す
     # TODO: 本人からではなくofferされるパターンと配属命令パターンの2種をアプリケーションがある程度完成したら実装する。変更容易性を検証するため
     + id*
     + status* <apply|disapproved|approved|assign>
@@ -104,6 +108,7 @@ namespace ActiveRecord {
 
   class DepartmentAssignmentActivity #LightGoldenRodYellow{
     # 配属に関わるイベントを管理するスーパークラス
+    # イベントの子クラステーブルの結果を保存。
     + id*
     + status* <apply|disapproved|approved|assign>
     + employee_id*
