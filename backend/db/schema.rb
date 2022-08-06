@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_06_092337) do
+ActiveRecord::Schema.define(version: 2022_08_06_110721) do
+
+  create_table "active_employee_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "active_employee_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["active_employee_id"], name: "index_active_employee_roles_on_active_employee_id"
+    t.index ["role_id"], name: "index_active_employee_roles_on_role_id"
+  end
 
   create_table "active_employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "last_name", null: false
@@ -44,5 +53,21 @@ ActiveRecord::Schema.define(version: 2022_08_06_092337) do
     t.index ["identifier"], name: "index_employees_on_identifier", unique: true
   end
 
+  create_table "personal_right_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_personal_right_roles_on_role_id"
+  end
+
+  create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "active_employee_roles", "active_employees"
+  add_foreign_key "active_employee_roles", "roles"
   add_foreign_key "active_employees", "employees"
+  add_foreign_key "personal_right_roles", "roles"
 end
