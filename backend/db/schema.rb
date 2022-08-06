@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_110719) do
     t.string "first_name", null: false
     t.date "birth_date", null: false
     t.string "email", null: false
+    t.string "password", null: false
     t.string "phone_number", null: false
     t.bigint "employee_id", null: false
     t.datetime "created_at", precision: 6, null: false
