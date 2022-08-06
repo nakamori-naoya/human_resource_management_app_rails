@@ -1,0 +1,2 @@
+class PersonalRightRole < ApplicationRecord
+end
