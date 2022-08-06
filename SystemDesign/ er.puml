@@ -51,6 +51,8 @@ namespace ActiveRecord {
     + id*
     + identifier*
     + name*
+    + email 
+    + phone_number
   }
 
   class CompanyEnter {
