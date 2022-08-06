@@ -38,6 +38,20 @@ namespace ActiveRecord {
     + employee_id*
   }
 
+  class ActiveEmployeeRole #LightGreen {
+    + active_employee_id*
+    + role_id*
+  }
+
+  class Role #LightGreen {
+    + id*
+    + name* #Roleクラスのサブクラスのクラス名からRoleを取り除いたものを入れる予定
+  }
+
+  class PersonalRightRole #LightGreen {
+    + role_id*
+  }
+
   class ActiveEmployeeAddress #LightCyan {
     + active_empolyee_id*
     + address_id*
@@ -175,5 +189,8 @@ namespace ActiveRecord {
   ActiveEmployeeAddress  |o-u-|| Address
   Department ||-l-o{ DepartmentBelong
   DepartmentBelong }o-l-|| Employee
+  ActiveEmployee ||-u-o{ ActiveEmployeeRole
+  ActiveEmployeeRole }|-u-|| Role
+  Role ||-u-o| PersonalRightRole
 }
 @enduml
