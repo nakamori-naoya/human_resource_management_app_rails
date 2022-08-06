@@ -23,6 +23,9 @@ gem 'puma', '~> 4.1'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rubocop', require:false
 gem 'rubocop-rails', require:false
+gem 'cancancan'
+gem 'devise_token_auth'
+gem 'rack-cors'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
@@ -31,6 +34,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'bullet' #N+1問題を発見するため
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'pry-rails'
 end
 
 group :development do
