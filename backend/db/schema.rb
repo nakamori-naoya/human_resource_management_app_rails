@@ -28,8 +28,11 @@ ActiveRecord::Schema.define(version: 2022_08_06_092337) do
   create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "identifier", null: false
     t.string "name", null: false
+    t.string "phone_number", null: false
+    t.string "email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_companies_on_email", unique: true
     t.index ["identifier"], name: "index_companies_on_identifier", unique: true
   end
 
