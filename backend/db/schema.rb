@@ -55,10 +55,8 @@ ActiveRecord::Schema.define(version: 2022_08_06_110721) do
 
   create_table "personal_right_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "role_id", null: false
-    t.bigint "name_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name_id"], name: "index_personal_right_roles_on_name_id"
     t.index ["role_id"], name: "index_personal_right_roles_on_role_id"
   end
 
