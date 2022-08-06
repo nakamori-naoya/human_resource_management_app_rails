@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Role, type: :model do
+RSpec.describe Ability, type: :model do
   let!(:employee){create(:employee)}
   let!(:active_employee){create(:active_employee, employee: employee)}
   let!(:role){create(:role)}
