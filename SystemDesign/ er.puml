@@ -32,11 +32,9 @@ namespace ActiveRecord {
   class ActiveEmployee #LightSalmon {
     + last_name*
     + first_name*
-    + middle_name
-    + birthday*
+    + birth_date*
     + email*
     + phone_number*
-    + address*
     + employee_id*
   }
 
@@ -44,7 +42,7 @@ namespace ActiveRecord {
     + last_name*
     + first_name*
     + middle_name
-    + birthday*
+    + birth_date*
     + retirement_date*
     + employee_id*
   }
