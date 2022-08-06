@@ -67,6 +67,7 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (11.1.3)
+    cancancan (3.4.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
@@ -217,6 +218,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bullet
   byebug
+  cancancan
   factory_bot_rails
   flamegraph
   listen (~> 3.2)
