@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmailAuth < ActiveRecord::Base
+class EmailAuth < ApplicationRecord
   extend Devise::Models
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

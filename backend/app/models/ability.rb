@@ -3,6 +3,5 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(subject)
-  end
+  def initialize(subject); end
 end
