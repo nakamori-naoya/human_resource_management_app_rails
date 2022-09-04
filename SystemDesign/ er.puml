@@ -32,19 +32,36 @@ namespace ActiveRecord {
   class ActiveEmployee #LightSalmon {
     + last_name*
     + first_name*
-    + middle_name
-    + birthday*
+    + birth_date*
     + email*
     + phone_number*
-    + address*
     + employee_id*
+  }
+
+  class ActiveEmployeeRole #LightGreen {
+    + active_employee_id*
+    + role_id*
+  }
+
+  class Role #LightGreen {
+    + id*
+    + name* #Roleクラスのサブクラスのクラス名からRoleを取り除いたものを入れる予定
+  }
+
+  class PersonalRightRole #LightGreen {
+    + role_id*
+  }
+
+  class ActiveEmployeeAddress #LightCyan {
+    + active_empolyee_id*
+    + address_id*
   }
 
   class RetirementEmployee #LightSalmon {
     + last_name*
     + first_name*
     + middle_name
-    + birthday*
+    + birth_date*
     + retirement_date*
     + employee_id*
   }
@@ -53,6 +70,22 @@ namespace ActiveRecord {
     + id*
     + identifier*
     + name*
+    + email 
+    + phone_number
+  }
+
+  class CompanyAddress #LightCyan {
+    + company_id*
+    + address_id*
+  }
+
+  class Address #LightCyan {
+    + postal_code*
+    + prefecture*
+    + city* 例：中野区
+    + address1* #町名が入る 例：東陽町
+    + address2* #番地以降が入る。 例：1-2-3
+    + buidings_and_room_number 例：東中野ビル1F 1233号室
   }
 
   class CompanyEnter {
@@ -138,6 +171,8 @@ namespace ActiveRecord {
 
 
   Company ||-l-o{ Employee
+  Company ||-l-|| CompanyAddress
+  CompanyAddress |o-l-|| Address
   Employee ||-l-|{ CompanyEnter
   Employee ||-l-|| ActiveEmployee
   Employee ||-l-o| RetirementEmployee
@@ -150,7 +185,12 @@ namespace ActiveRecord {
   DepartmentAssignmentActivity ||-r-o| DepartmentAssignmentApply
   DepartmentAssignmentActivity ||-r-o| DepartmentAssignmentJudge
   Employee ||-l-o{ DepartmentLeave
+  ActiveEmployee ||-u-|| ActiveEmployeeAddress
+  ActiveEmployeeAddress  |o-u-|| Address
   Department ||-l-o{ DepartmentBelong
   DepartmentBelong }o-l-|| Employee
+  ActiveEmployee ||-u-o{ ActiveEmployeeRole
+  ActiveEmployeeRole }|-u-|| Role
+  Role ||-u-o| PersonalRightRole
 }
 @enduml
