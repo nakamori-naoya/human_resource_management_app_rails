@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :employee do
-    classification {'full_time'}
+    classification { 'full_time' }
   end
 end
